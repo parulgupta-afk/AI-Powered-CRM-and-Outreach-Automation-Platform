@@ -101,7 +101,10 @@ export default function UsersPage({ currentUser }) {
   }
 
   function isSelf(user) {
-    return Boolean(me) && (user.id === me.id || user.email === me.email)
+    if (!me) return false
+    const sameEmail =
+      Boolean(me.email) && user.email.trim().toLowerCase() === String(me.email).trim().toLowerCase()
+    return user.id === me.id || sameEmail
   }
 
   function openCreate() {
